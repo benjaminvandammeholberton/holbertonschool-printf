@@ -1,0 +1,207 @@
+.TH _PRINTF "1" "27 March 2023" "Version 1.0 by Ben&Chris" "_Printf manual"
+
+.SH NAME
+_printf - function almost identical to printf
+
+.SH SYNOPSIS
+.B #include <stdarg.h>
+.PP
+.B int _printf(const char *
+.I format
+, ...);
+
+.SH DESCRIPTION
+The function in the
+.B _printf()
+produce output according to a format as described below. The function
+.B _printf()
+write output to
+.I stdout
+, the standard output stream; write to the character string
+.I str.
+
+." next paragraph ."
+.PP
+This function write the output under the control of a
+.I format
+string that specifies how subsequent arguments (or arguments accessed via
+the variable-length argument facilities of stdarg(3)) are converted for output.
+
+.SH Format of the format string
+The format string is a character string, beginning and ending in its initial
+shift state, if any. The format string is composed of zero or more directives:
+ordinary characters
+(not
+.RB %
+), which are copied unchanged to the output stream; and conversion
+specifications, each of which results in fetching zero or
+more subsequent arguments. Each conversion specification is
+introduced by the character
+.RB %
+, and ends with a
+.I conversion specifier
+.In between there may be (in this order) zero or more
+.I flags.
+
+The overall syntax of a conversion specification is:
+
+.RS
+%[flags]conversion
+.RE
+.PP
+The arguments must correspond properly (after type promotion)
+with the conversion specifier. By default, the arguments
+are used in the order given, where each conversion specifier
+asks for the next argument (and it is an error if insufficiently
+many arguments are given). Thus,
+.RS
+_printf("%d", num);
+.RE
+
+.SH Flag characters
+The character % is followed by zero or more of the following flags:
+.TP
+\fB0\fP
+The value should be zero padded.  For d, i, conversions, the converted
+value is padded on the left with zeros rather than blanks.  If the 0
+and - flags both appear, the 0 flag is ignored.  If a precision is
+given with a numeric conversion (d and i), the 0 flag is ignored.
+For other conversions, the behavior is undefined.
+
+.SH Conversion specifiers
+A character that specifies the type of conversion to be applied.
+The conversion specifiers and their meanings are:
+.TP
+\fBd, i\fP
+The
+.I int
+argument is converted to signed decimal notation. The precision,
+if any, gives the minimum number of digits that must appear;
+if the converted value requires fewer digits, it is padded
+on the left with zeros.  The default precision is 1.
+When 0 is printed with an explicit precision 0, the output is empty.
+.TP
+\fBc\fP
+The argument is converted to a byte by a call to the function,
+with a conversion state starting in the initial state,
+and the resulting byte character is written.
+.TP
+\fBs\fP
+Characters from the array are written up to (but not including)
+a terminating null byte ('\0'); no more than the number specified are written.
+.TP
+\fB%\fP
+A '%' is written.  No argument is converted.
+The complete conversion specification is '%%'.
+.SH RETURN VALUE
+Upon successful return, these functions return the number of characters printed
+(excluding the null byte used to end output to strings).
+.SH EXAMPLES
+To print a simple sentence.
+.RS
+#include "main.h"
+.RE
+.RS
+_printf("Let's try to printf a simple sentence.\n");
+.RE
+.RS
+#include "main.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <stdarg.h>
+.RE
+.PP
+int _printf(const char *format, ...)
+{
+.RS
+va_list ap;
+int i, j;
+int len = 0;
+.RE
+.RS
+structure conversion[] = {
+.RS
+{"d", printInt},
+.RE
+.RS
+{"i", printInt},
+.RE
+.RS
+{"c", printChar},
+.RE
+.RS
+{"s", printString},
+.RE
+.RS
+{"%", printPercent}
+.RE
+.RS
+};
+.RE
+.RS
+va_start(ap, format);
+i = 0;
+.RE
+.RS
+while (format[i] != 0)
+.RE
+{
+.RS
+while (format[i] == '%')
+.RE
+{
+.RS
+i++;
+j = 0;
+while (j < 5)
+.RE
+{
+.RS
+if (format[i] == *mastructure[j].letter)
+.RE
+{
+.RS
+len = len + mastructure[j].f(ap);
+.RE
+.RS
+i++;
+.RE
+.RS
+break;
+.RE
+.RS
+}
+.RE
+.RS
+j++;
+.RE
+.RS
+}
+.RE
+.RS
+}
+.RE
+.RS
+if (format[i] == 0)
+break;
+.RE
+.RS
+_putchar(format[i]);
+.RE
+.RS
+len++;
+.RE
+.RS
+i++;
+.RE
+.RS
+}
+.RE
+.RS
+va_end(ap);
+.RE
+.RS
+return (len);
+.RE
+}
+.RE
