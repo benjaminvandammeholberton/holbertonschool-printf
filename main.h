@@ -16,9 +16,9 @@ typedef struct structprint
 	int (*f)(va_list arg);
 } structprint;
 
-int _print(const char *format, ...);
-int pritnInt(va_list ap);
-int pritnInt2(int n);
+int _printf(const char *format, ...);
+int printInt(va_list ap);
+int printInt2(int n);
 int printChar(va_list ap);
 int printString(va_list ap);
 int _putchar(char c);
