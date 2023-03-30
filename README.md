@@ -62,7 +62,62 @@ Before coding, we drawn this flowchart to have an idea of how do we have to buil
 
 ## Exemples
 Once the function done, we made some tests to compare the result with the real ```printf``` function :
+```
+benjamin$ cat main.c
+#include <stdio.h>
+#include "main.h"
+/**
+* main - Entry point
+*
+* Return: Always 0
+*/
+int main(void)
+{
+	int len = 0;
+	int len2 = 0;
+	char character = 'K';
+	char character2 = 0;
+	char *string = "this is another one";
+	char *string2 = NULL;
+	int number1 = 4521;
+	int number2 = -345;
 
+	len = _printf("This is a string and %s.\n", string);
+	len2 = printf("This is a string and %s.\n", string);
+	_printf("The length of our function is %d.\n", len);
+	printf("The length of original printf function is %d.\n", len2);
+	len = _printf("Test with number : %d, %d, %d.\n", 10, number1, number2);
+	len2 = printf("Test with number : %d, %d, %d.\n", 10, number1, number2);
+	_printf("The length of our function is %d.\n", len);
+	printf("The length of original printf function is %d.\n", len2);
+	len = _printf("Some more test : %%, %c, %c.\n", character, 'L');
+	len2 = printf("Some more test : %%, %c, %c.\n", character, 'L');
+	_printf("The length of our function is %d.\n", len);
+	printf("The length of original printf function is %d.\n", len2);
+	len = _printf("Test with NULL and 0: %s, %c, %d.\n", string2, character2, 0);
+	len2 = printf("Test with NULL and 0: %s, %c, %d.\n", string2, character2, 0);
+	_printf("The length of our function is %d.\n", len);
+	printf("The length of original printf function is %d.\n", len2);
+	return (0);
+}
+benjamin$ gcc -Wall -Werror -Wextra -pedantic -std=gnu89 -Wno-format *.c && ./a.out
+This is a string and this is another one.
+This is a string and this is another one.
+The length of our function is 42.
+The length of original printf function is 42.
+Test with number : 10, 4521, -345.
+Test with number : 10, 4521, -345.
+The length of our function is 35.
+The length of original printf function is 35.
+Some more test : %, K, L.
+Some more test : %, K, L.
+The length of our function is 26.
+The length of original printf function is 26.
+Test with NULL and 0: (null), , 0.
+Test with NULL and 0: (null), , 0.
+The length of our function is 36.
+The length of original printf function is 36.
+benjamin$
+```
 ## Authors
 This project was realized by Christophe Ngan (@Sirothpech) & Benjamin Vandamme (@BenJamminDev)
-
