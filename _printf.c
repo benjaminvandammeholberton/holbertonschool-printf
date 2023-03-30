@@ -27,15 +27,16 @@ int _printf(const char *format, ...)
 		return (-1);
 	while (format != NULL && format[i] != 0)
 	{
-		if (format[i] == '%')
+		while (format[i] == '%')
 		{
+			i++;
 			j = 0;
 			while (j < 5)
 			{
-				if (format[i + 1] == *(conversion[j].letter))
+				if (format[i] == *(conversion[j].letter))
 				{
 					len = len + conversion[j].f(ap);
-					i += 2;
+					i ++;
 					break;
 				}
 				j++;
