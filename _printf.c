@@ -1,6 +1,6 @@
 #include "main.h"
 #include <stdarg.h>
-
+#include <stdlib.h>
 /**
   * _printf -  function that prints a string on the standard output
   * @format: string that will be printed
@@ -18,12 +18,12 @@ int _printf(const char *format, ...)
 		{"i", printInt},
 		{"c", printChar},
 		{"s", printString},
-		{"%", printPercent},
+		{"%", printPercent}
 	};
 
 	va_start(ap, format);
 	i = 0;
-	while (format[i] != 0)
+	while (format != NULL && format[i] != 0)
 	{
 		while (format[i] == '%')
 		{
@@ -31,7 +31,7 @@ int _printf(const char *format, ...)
 			j = 0;
 			while (j < 5)
 			{
-				if (format[i] == *conversion[j].letter)
+				if (format[i] == *(conversion[j].letter))
 				{
 					len = len + conversion[j].f(ap);
 					i++;
