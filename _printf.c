@@ -13,7 +13,7 @@ int _printf(const char *format, ...)
 	int i, j;
 	int len = 0;
 
-	structprint conversion[] = {
+	print conversion[] = {
 		{"d", printInt},
 		{"i", printInt},
 		{"c", printChar},
@@ -23,6 +23,8 @@ int _printf(const char *format, ...)
 
 	va_start(ap, format);
 	i = 0;
+	if (format == NULL)
+		return (-1);
 	while (format != NULL && format[i] != 0)
 	{
 		while (format[i] == '%')

@@ -10,11 +10,11 @@
  * @f: print function for specific type
  */
 
-typedef struct structprint
+typedef struct print
 {
 	char *letter;
 	int (*f)(va_list arg);
-} structprint;
+} print;
 
 int _printf(const char *format, ...);
 int printInt(va_list ap);
