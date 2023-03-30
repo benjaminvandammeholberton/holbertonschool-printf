@@ -56,6 +56,10 @@ We have done this project in teams of two people in four days.
 ## Flowchart
 Before coding, we drawn this flowchart to have an idea of how do we have to build the function : 
 
+![flowchart](flowchart.jpg)
+
+
+
 ## Exemples
 Once the function done, we made some tests to compare the result with the real ```printf``` function :
 
