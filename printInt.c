@@ -11,7 +11,7 @@
 int printInt(va_list ap)
 {
 	int len = 0;
-	int n;
+	long n;
 
 	n = va_arg(ap, int);
 
@@ -26,7 +26,7 @@ int printInt(va_list ap)
   * Return: the number of numbers printed
   */
 
-int printInt2(int n)
+int printInt2(long n)
 {
 	int len = 0;
 

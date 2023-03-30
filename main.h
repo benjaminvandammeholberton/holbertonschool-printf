@@ -18,7 +18,7 @@ typedef struct print
 
 int _printf(const char *format, ...);
 int printInt(va_list ap);
-int printInt2(int n);
+int printInt2(long n);
 int printChar(va_list ap);
 int printString(va_list ap);
 int _putchar(char c);
