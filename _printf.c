@@ -12,7 +12,6 @@ int _printf(const char *format, ...)
 	va_list ap;
 	int i, j;
 	int len = 0;
-
 	print conversion[] = {
 		{"d", printInt},
 		{"i", printInt},
@@ -36,7 +35,7 @@ int _printf(const char *format, ...)
 				if (format[i] == *(conversion[j].letter))
 				{
 					len = len + conversion[j].f(ap);
-					i ++;
+					i++;
 					break;
 				}
 				j++;
