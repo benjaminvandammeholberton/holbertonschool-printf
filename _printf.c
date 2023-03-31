@@ -17,7 +17,8 @@ int _printf(const char *format, ...)
 		{"i", printInt},
 		{"c", printChar},
 		{"s", printString},
-		{"%", printPercent}
+		{"%", printPercent},
+		{"b", printBinary}
 	};
 
 	va_start(ap, format);
@@ -29,7 +30,7 @@ int _printf(const char *format, ...)
 	while (format[i] != 0)
 	{
 		j = 0;
-		while (j < 5)
+		while (j < 6)
 		{
 			while (format[i] == '%'
 			       && format[i + 1] == *(conversion[j].letter))
