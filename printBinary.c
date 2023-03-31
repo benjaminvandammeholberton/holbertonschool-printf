@@ -32,7 +32,10 @@ int printBinary2(unsigned int n)
 	int len = 0;
 
 	if (n == 0)
+	{
 		_putchar(0 + '0');
+		len++;
+	}
 	while (n > 0)
 	{
 		binaryNum[i] = n % 2;
