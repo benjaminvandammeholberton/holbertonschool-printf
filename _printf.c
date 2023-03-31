@@ -37,6 +37,7 @@ int _printf(const char *format, ...)
 			{
 				len = len + conversion[j].f(ap);
 				i += 2;
+				j = 0;
 			}
 			j++;
 		}
